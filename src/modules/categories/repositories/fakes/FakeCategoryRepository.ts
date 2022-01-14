@@ -33,6 +33,16 @@ export default class FakeCategoryRepository implements ICategoryRepository {
     return category;
   }
 
+  public async save(category: Category): Promise<Category> {
+    const findIndex = this.categories.findIndex(
+      findCategory => findCategory.id === category.id,
+    );
+
+    this.categories[findIndex] = category;
+
+    return category;
+  }
+
   public async delete(id: string): Promise<void> {
     const findIndex = this.categories.findIndex(
       findCategory => findCategory.id === id,
