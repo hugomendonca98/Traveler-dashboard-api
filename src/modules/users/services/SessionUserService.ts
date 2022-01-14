@@ -1,6 +1,7 @@
+import { sign } from 'jsonwebtoken';
+
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/appError';
-import { sign } from 'jsonwebtoken';
 import User from '../infra/typeorm/entities/User';
 import IHashProvider from '../providers/hashProvider/models/IHashProvider';
 import IUserRepository from '../repositories/IUserRepository';

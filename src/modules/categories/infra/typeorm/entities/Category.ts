@@ -6,8 +6,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('users')
-class User {
+@Entity('category')
+export default class Category {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -15,10 +15,7 @@ class User {
   name: string;
 
   @Column()
-  email: string;
-
-  @Column()
-  password: string;
+  icon: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -26,5 +23,3 @@ class User {
   @UpdateDateColumn()
   updated_at: Date;
 }
-
-export default User;
