@@ -10,6 +10,7 @@ describe('ListCategories', () => {
     listCategoryService = new ListCategoryService(fakeCategoryRepository);
   });
 
+  // Deve ser capaz de listar todas as categorias.
   it('Should be able to list all categories.', async () => {
     const category = await fakeCategoryRepository.create({
       name: 'category name',
