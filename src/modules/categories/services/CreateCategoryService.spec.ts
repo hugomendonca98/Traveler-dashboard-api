@@ -11,7 +11,8 @@ describe('CreateCategory', () => {
     createCategoryService = new CreateCategoryService(fakeCategoryRepository);
   });
 
-  it('Should be able to create new category', async () => {
+  // Deve ser capaz de criar uma nova categoria.
+  it('Should be able to create new category.', async () => {
     const category = await createCategoryService.execute({
       name: 'category name',
       icon: 'icon name',
@@ -20,7 +21,8 @@ describe('CreateCategory', () => {
     expect(category).toHaveProperty('id');
   });
 
-  it('Should not be able to create a new category with same name another', async () => {
+  // Não deve ser possível criar uma nova categoria com o mesmo nome de outra.
+  it('Should not be able to create a new category with same name another.', async () => {
     await fakeCategoryRepository.create({
       name: 'category name',
       icon: 'icon name',
