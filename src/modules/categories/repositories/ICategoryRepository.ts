@@ -7,5 +7,5 @@ export default interface ICategoryRepository {
   findById(id: string): Promise<Category | undefined>;
   findAll(): Promise<Category[]>;
   save(category: Category): Promise<Category>;
-  delete(id: string): Promise<void>;
+  delete(category: Category): Promise<void>;
 }

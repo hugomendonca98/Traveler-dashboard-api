@@ -11,6 +11,6 @@ export default class DeleteCategoryService {
       throw new AppError('the category does not exist.');
     }
 
-    await this.categoryRepository.delete(id);
+    await this.categoryRepository.delete(findCategoryToDelete);
   }
 }
