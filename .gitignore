@@ -4,4 +4,5 @@
 rascunhos.md
 /dist
 /coverage
-/temp
+/temp/*.*
+/temp/uploads/*.*

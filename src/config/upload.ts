@@ -28,6 +28,7 @@ export default {
   uploadsFolder: path.resolve(tempFolder, 'uploads'),
 
   multer: {
+    limits: { fileSize: 71680 },
     storage: multer.diskStorage({
       destination: tempFolder,
       filename(_request, file, callback) {
