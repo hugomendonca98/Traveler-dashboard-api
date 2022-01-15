@@ -44,7 +44,7 @@ export default class CategoryRepository implements ICategoryRepository {
   }
 
   public async delete(category: Category): Promise<void> {
-    await this.ormRepository.delete(category);
+    await this.ormRepository.remove(category);
   }
 
   public async save(category: Category): Promise<Category> {

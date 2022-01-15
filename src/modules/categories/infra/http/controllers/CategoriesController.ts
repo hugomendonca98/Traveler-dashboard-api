@@ -1,14 +1,59 @@
-import ListCategoryService from '@modules/categories/services/ListCategoryService';
 import { Request, Response } from 'express';
+
+import CreateCategoryService from '@modules/categories/services/CreateCategoryService';
+import DeleteCategoryService from '@modules/categories/services/DeleteCategoryService';
+import ListCategoryService from '@modules/categories/services/ListCategoryService';
+import UpdateCategoryService from '@modules/categories/services/UpdateCategoryService';
 import CategoryRepository from '../../typeorm/repositories/CategoryRepository';
 
 export default class CategoriesController {
   public async Index(_request: Request, response: Response): Promise<Response> {
-    const categoriesRepository = new CategoryRepository();
-    const categoriesService = new ListCategoryService(categoriesRepository);
+    const categoryRepository = new CategoryRepository();
+    const listCategoryService = new ListCategoryService(categoryRepository);
 
-    const categories = await categoriesService.execute();
+    const categories = await listCategoryService.execute();
 
     return response.json(categories);
+  }
+
+  public async Create(request: Request, response: Response): Promise<Response> {
+    const { name, icon } = request.body;
+
+    const categoryRepository = new CategoryRepository();
+    const createCategoryService = new CreateCategoryService(categoryRepository);
+
+    const category = await createCategoryService.execute({
+      name,
+      icon,
+    });
+
+    return response.json(category);
+  }
+
+  public async Delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const categoryRepository = new CategoryRepository();
+    const deleteCategoryService = new DeleteCategoryService(categoryRepository);
+
+    await deleteCategoryService.execute(id);
+
+    return response.json({ message: 'Category deleted successfully.' });
+  }
+
+  public async Update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const { name, icon } = request.body;
+
+    const categoryRepository = new CategoryRepository();
+    const updateCategoryService = new UpdateCategoryService(categoryRepository);
+
+    const category = await updateCategoryService.execute({
+      id,
+      name,
+      icon,
+    });
+
+    return response.json(category);
   }
 }
