@@ -4,6 +4,7 @@ import CreateCategoryService from '@modules/categories/services/CreateCategorySe
 import DeleteCategoryService from '@modules/categories/services/DeleteCategoryService';
 import ListCategoryService from '@modules/categories/services/ListCategoryService';
 import UpdateCategoryService from '@modules/categories/services/UpdateCategoryService';
+import DiskStorageProvider from '@shared/providers/StorageProvider/implementations/DiskStorageProvider';
 import CategoryRepository from '../../typeorm/repositories/CategoryRepository';
 
 export default class CategoriesController {
@@ -17,14 +18,18 @@ export default class CategoriesController {
   }
 
   public async Create(request: Request, response: Response): Promise<Response> {
-    const { name, icon } = request.body;
+    const { name } = request.body;
 
     const categoryRepository = new CategoryRepository();
-    const createCategoryService = new CreateCategoryService(categoryRepository);
+    const storageProvider = new DiskStorageProvider();
+    const createCategoryService = new CreateCategoryService(
+      categoryRepository,
+      storageProvider,
+    );
 
     const category = await createCategoryService.execute({
       name,
-      icon,
+      icon: request.file?.filename || '',
     });
 
     return response.json(category);
