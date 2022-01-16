@@ -33,8 +33,10 @@ export default class FakeCityRepository implements ICityRepository {
     return this.cities;
   }
 
-  public async delete(id: string): Promise<void> {
-    const cityIndex = this.cities.findIndex(findCity => findCity.id === id);
+  public async delete(city: City): Promise<void> {
+    const cityIndex = this.cities.findIndex(
+      findCity => findCity.id === city.id,
+    );
 
     this.cities.splice(cityIndex, 1);
   }
