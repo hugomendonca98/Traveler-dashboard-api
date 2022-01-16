@@ -11,6 +11,10 @@ export default class CreateCategoryService {
   ) {}
 
   public async execute({ name, icon }: ICreateCategoryDTO): Promise<Category> {
+    if (!icon) {
+      throw new AppError('The category icon is requerid.');
+    }
+
     const findCategoryByName = await this.categoryRepository.findByName(name);
 
     if (findCategoryByName) {

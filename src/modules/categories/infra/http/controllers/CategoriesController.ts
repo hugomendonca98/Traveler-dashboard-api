@@ -19,6 +19,7 @@ export default class CategoriesController {
 
   public async Create(request: Request, response: Response): Promise<Response> {
     const { name } = request.body;
+    const icon = request.file?.filename;
 
     const categoryRepository = new CategoryRepository();
     const storageProvider = new DiskStorageProvider();
@@ -29,7 +30,7 @@ export default class CategoriesController {
 
     const category = await createCategoryService.execute({
       name,
-      icon: request.file?.filename || '',
+      icon,
     });
 
     return response.json(category);
@@ -49,6 +50,7 @@ export default class CategoriesController {
   public async Update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const { name } = request.body;
+    const icon = request.file?.filename;
 
     const categoryRepository = new CategoryRepository();
     const storageProvider = new DiskStorageProvider();
@@ -60,7 +62,7 @@ export default class CategoriesController {
     const category = await updateCategoryService.execute({
       id,
       name,
-      icon: request.file?.filename,
+      icon,
     });
 
     return response.json(category);

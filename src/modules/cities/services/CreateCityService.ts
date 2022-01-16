@@ -15,6 +15,10 @@ export default class CreateCityService {
     image,
     description,
   }: ICreateCityDTO): Promise<City> {
+    if (!image) {
+      throw new AppError('The city image is requerid.');
+    }
+
     const findCityName = await this.cityRepository.findByName(name);
 
     if (findCityName) {

@@ -1,6 +1,5 @@
 import AppError from '@shared/errors/appError';
 import crypto from 'crypto';
-import { Request } from 'express';
 import multer, { StorageEngine } from 'multer';
 import path from 'path';
 

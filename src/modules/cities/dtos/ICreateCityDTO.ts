@@ -1,5 +1,5 @@
 export default interface ICreateCityDTO {
   name: string;
-  image: string;
+  image?: string;
   description: string;
 }
