@@ -48,15 +48,19 @@ export default class CategoriesController {
 
   public async Update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { name, icon } = request.body;
+    const { name } = request.body;
 
     const categoryRepository = new CategoryRepository();
-    const updateCategoryService = new UpdateCategoryService(categoryRepository);
+    const storageProvider = new DiskStorageProvider();
+    const updateCategoryService = new UpdateCategoryService(
+      categoryRepository,
+      storageProvider,
+    );
 
     const category = await updateCategoryService.execute({
       id,
       name,
-      icon,
+      icon: request.file?.filename,
     });
 
     return response.json(category);

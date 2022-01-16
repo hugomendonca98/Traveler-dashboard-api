@@ -1,14 +1,20 @@
 import AppError from '@shared/errors/appError';
+import FakeStorageProvider from '@shared/providers/StorageProvider/fakes/FakeStorageProvider';
 import FakeCategoryRepository from '../repositories/fakes/FakeCategoryRepository';
 import UpdateCategoryService from './UpdateCategoryService';
 
 let fakeCategoryRepository: FakeCategoryRepository;
+let fakeStorageProvider: FakeStorageProvider;
 let updateCategoryService: UpdateCategoryService;
 
 describe('UpdateCategory', () => {
   beforeEach(() => {
     fakeCategoryRepository = new FakeCategoryRepository();
-    updateCategoryService = new UpdateCategoryService(fakeCategoryRepository);
+    fakeStorageProvider = new FakeStorageProvider();
+    updateCategoryService = new UpdateCategoryService(
+      fakeCategoryRepository,
+      fakeStorageProvider,
+    );
   });
 
   // Deve ser capaz de atualizar a categoria.
@@ -36,6 +42,21 @@ describe('UpdateCategory', () => {
         id: 'invalid id',
         name: 'category name',
         icon: 'icon name',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  // Não deve ser possível atualizar uma categoria com uma icon inexistente.
+  it('Should not be possible to update a category with a non-existent icon.', async () => {
+    const category = await fakeCategoryRepository.create({
+      name: 'category name',
+      icon: 'categoryicon.jpg',
+    });
+    await expect(
+      updateCategoryService.execute({
+        id: category.id,
+        name: 'Category name',
+        icon: '',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

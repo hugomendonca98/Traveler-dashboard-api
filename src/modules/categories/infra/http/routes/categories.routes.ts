@@ -29,10 +29,11 @@ categoriesRoutes.delete('/:id', ensureAuth, categoriesController.Delete);
 categoriesRoutes.put(
   '/:id',
   ensureAuth,
+  upload.single('icon'),
+
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().min(2).required(),
-      icon: Joi.string().min(2).required(),
     },
   }),
   categoriesController.Update,
