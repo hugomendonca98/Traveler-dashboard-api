@@ -41,4 +41,14 @@ describe('CreateCategory', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  // Não deve ser capaz de criar uma categoria sem icone.
+  it('Should not be able to create a category without an icon.', async () => {
+    await expect(
+      createCategoryService.execute({
+        name: 'category name',
+        icon: undefined,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

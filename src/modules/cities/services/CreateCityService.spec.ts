@@ -44,4 +44,15 @@ describe('CreateCity', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  // Não deve ser capaz de criar uma cidade sem imagem.
+  it('Should not be able to create a city without an image.', async () => {
+    await expect(
+      createCityService.execute({
+        name: 'city name',
+        image: undefined,
+        description: 'description',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
