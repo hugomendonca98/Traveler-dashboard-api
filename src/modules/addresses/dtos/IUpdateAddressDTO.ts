@@ -3,5 +3,5 @@ export default interface IUpdateAddressDTO {
   zip_code: string;
   street: string;
   neighborhood: string;
-  number: number;
+  number: number | null;
 }

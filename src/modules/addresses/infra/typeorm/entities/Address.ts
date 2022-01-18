@@ -20,8 +20,8 @@ export default class Address {
   @Column()
   neighborhood: string;
 
-  @Column()
-  number: number;
+  @Column({ type: 'integer', nullable: true })
+  number: number | null;
 
   @CreateDateColumn()
   created_at: Date;

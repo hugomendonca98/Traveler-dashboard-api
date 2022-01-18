@@ -29,6 +29,7 @@ export default class CreateAddress1642474916587 implements MigrationInterface {
             name: 'number',
             type: 'integer',
             isNullable: true,
+            default: null,
           },
           {
             name: 'created_at',
