@@ -1,5 +1,5 @@
 import ICreateAddressDTO from '@modules/addresses/dtos/ICreateAddressDTO';
-import IFindEqualAddress from '@modules/addresses/dtos/IFindEqualAddressDTO';
+import IFindEqualAddressDTO from '@modules/addresses/dtos/IFindEqualAddressDTO';
 import IAdressRepository from '@modules/addresses/repositories/IAddressRepository';
 import { getRepository, Repository } from 'typeorm';
 import Address from '../entities/Address';
@@ -48,7 +48,7 @@ export default class AddressRepository implements IAdressRepository {
     street,
     neighborhood,
     number,
-  }: IFindEqualAddress): Promise<Address | undefined> {
+  }: IFindEqualAddressDTO): Promise<Address | undefined> {
     const address = await this.ormRepository.findOne({
       where: { zip_code, street, neighborhood, number },
     });

@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 import ICreateAddressDTO from '@modules/addresses/dtos/ICreateAddressDTO';
 import Address from '@modules/addresses/infra/typeorm/entities/Address';
-import IFindEqualAddress from '@modules/addresses/dtos/IFindEqualAddressDTO';
+import IFindEqualAddressDTO from '@modules/addresses/dtos/IFindEqualAddressDTO';
 import IAddressRepository from '../IAddressRepository';
 
 export default class FakeAddressRepository implements IAddressRepository {
@@ -29,7 +29,7 @@ export default class FakeAddressRepository implements IAddressRepository {
     street,
     neighborhood,
     number,
-  }: IFindEqualAddress): Promise<Address | undefined> {
+  }: IFindEqualAddressDTO): Promise<Address | undefined> {
     const address = this.addresses.find(
       findAddress =>
         findAddress.zip_code === zip_code &&

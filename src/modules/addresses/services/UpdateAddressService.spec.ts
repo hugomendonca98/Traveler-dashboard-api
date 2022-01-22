@@ -17,7 +17,7 @@ describe('UpdateAddress', () => {
       zip_code: '12345678',
       street: 'street jon doe',
       neighborhood: 'neighborhood jon doe',
-      number: 123,
+      number: null,
     });
 
     const addressUpdated = await updateAddresService.execute({
