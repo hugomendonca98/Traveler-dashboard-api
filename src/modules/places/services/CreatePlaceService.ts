@@ -33,9 +33,11 @@ export default class CreatePlaceService {
       throw new AppError('Place already exist.');
     }
 
+    const fileName = await this.storageProvider.saveFile(image);
+
     const place = await this.placeRepository.create({
       name,
-      image,
+      image: fileName,
       description,
       category_id,
       address_id,
