@@ -79,4 +79,25 @@ describe('UpdatePlace', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('Should not possible to update one location with all information identical to another.', async () => {
+    const place = await fakePlaceRepository.create({
+      name: 'São Paulo',
+      image: 'SãoPaulo.jpg',
+      description: 'São Paulo description',
+      category_id: '1234',
+      address_id: '12345',
+    });
+
+    await expect(
+      updatePlaceService.execute({
+        id: place.id,
+        name: 'São Paulo',
+        image: 'SãoPaulo.jpg',
+        description: 'São Paulo description',
+        category_id: '1234',
+        address_id: '12345',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
