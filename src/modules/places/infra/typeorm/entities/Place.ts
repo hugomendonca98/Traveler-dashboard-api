@@ -1,6 +1,3 @@
-import Address from '@modules/addresses/infra/typeorm/entities/Address';
-import Category from '@modules/categories/infra/typeorm/entities/Category';
-
 import {
   Column,
   CreateDateColumn,
@@ -10,6 +7,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { Exclude } from 'class-transformer';
+
+import Address from '@modules/addresses/infra/typeorm/entities/Address';
+import Category from '@modules/categories/infra/typeorm/entities/Category';
 
 @Entity('place')
 export default class Place {
@@ -26,16 +28,19 @@ export default class Place {
   description: string;
 
   @Column()
+  @Exclude()
   category_id: string;
 
-  @ManyToOne(() => Category)
+  // eagler é para trazer as relações, cascade se tiver ralação dentro da relação.
+  @ManyToOne(() => Category, { eager: true, cascade: true })
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
   @Column()
+  @Exclude()
   address_id: string;
 
-  @ManyToOne(() => Address)
+  @ManyToOne(() => Address, { eager: true, cascade: true })
   @JoinColumn({ name: 'address_id' })
   address: Address;
 

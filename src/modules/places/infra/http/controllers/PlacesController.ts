@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
+import { instanceToInstance } from 'class-transformer';
 
 import CreatePlaceService from '@modules/places/services/CreatePlaceService';
 import DeletePlaceService from '@modules/places/services/DeletePlaceService';
 import ListPlaceService from '@modules/places/services/ListPlaceService';
 import UpdatePlaceService from '@modules/places/services/UpdatePlaceService';
 import DiskStorageProvider from '@shared/providers/StorageProvider/implementations/DiskStorageProvider';
-import PlaceRepository from '../typeorm/repositories/PlaceRepository';
+import PlaceRepository from '../../typeorm/repositories/PlaceRepository';
 
 export default class PlacesController {
   public async Create(request: Request, response: Response): Promise<Response> {
@@ -27,7 +28,7 @@ export default class PlacesController {
       address_id,
     });
 
-    return response.json(place);
+    return response.json(instanceToInstance(place));
   }
 
   public async Update(request: Request, response: Response): Promise<Response> {
@@ -51,7 +52,7 @@ export default class PlacesController {
       address_id,
     });
 
-    return response.json(place);
+    return response.json(instanceToInstance(place));
   }
 
   public async Delete(request: Request, response: Response): Promise<Response> {
@@ -73,6 +74,6 @@ export default class PlacesController {
 
     const places = await listPlaceService.execute();
 
-    return response.json(places);
+    return response.json(instanceToInstance(places));
   }
 }

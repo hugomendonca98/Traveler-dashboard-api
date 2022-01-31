@@ -3,7 +3,7 @@ import ensureAuth from '@modules/users/infra/http/middlewares/ensureAuth';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import multer from 'multer';
-import PlacesController from '../PlacesController';
+import PlacesController from '../controllers/PlacesController';
 
 const placeRouters = Router();
 const upload = multer(uploadConfig.multer);
