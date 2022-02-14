@@ -6,6 +6,7 @@ import 'express-async-errors';
 import AppError from '@shared/errors/appError';
 import { MulterError } from 'multer';
 import { errors } from 'celebrate';
+import upload from '@config/upload';
 import routes from './routes';
 
 dotenv.config();
@@ -16,6 +17,7 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
+app.use('/files', express.static(upload.uploadsFolder));
 app.use(errors());
 
 app.use(

@@ -10,7 +10,7 @@ const citiesRouter = Router();
 const upload = multer(uploadConfig.multer);
 const citiesController = new CitiesController();
 
-citiesRouter.get('/', ensureAuth, citiesController.Index);
+citiesRouter.get('/', citiesController.Index);
 
 citiesRouter.post(
   '/',

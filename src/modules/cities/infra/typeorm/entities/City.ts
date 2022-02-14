@@ -1,3 +1,5 @@
+import upload from '@config/upload';
+import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -25,4 +27,20 @@ export default class City {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'image_url' })
+  getAvatarUrl(): string | null {
+    if (!this.image) {
+      return null;
+    }
+
+    switch (upload.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.image}`;
+      case 's3':
+        return `${process.env.APP_API_URL}/files/${this.image}`;
+      default:
+        return null;
+    }
+  }
 }
