@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import upload from '@config/upload';
-import { Expose } from 'class-transformer';
+import Place from '@modules/places/infra/typeorm/entities/Place';
+
+import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -22,6 +27,9 @@ export default class City {
   @Column()
   description: string;
 
+  @OneToMany(() => Place, place => place.city, { eager: true })
+  place: Place[];
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -29,7 +37,7 @@ export default class City {
   updated_at: Date;
 
   @Expose({ name: 'image_url' })
-  getAvatarUrl(): string | null {
+  getImageUrl(): string | null {
     if (!this.image) {
       return null;
     }

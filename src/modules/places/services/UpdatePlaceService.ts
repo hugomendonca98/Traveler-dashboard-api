@@ -15,6 +15,7 @@ export default class UpdatePlaceService {
     name,
     image,
     description,
+    city_id,
     category_id,
     address_id,
   }: IUpdatePlaceDTO): Promise<Place> {
@@ -32,6 +33,7 @@ export default class UpdatePlaceService {
       name,
       image,
       description,
+      city_id,
       category_id,
       address_id,
     });
@@ -48,6 +50,7 @@ export default class UpdatePlaceService {
       name,
       image: fileName,
       description,
+      city_id,
       category_id,
       address_id,
     });

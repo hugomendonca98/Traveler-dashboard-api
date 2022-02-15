@@ -16,6 +16,7 @@ export default class PlaceRepository implements IPlaceRepository {
     name,
     image,
     description,
+    city_id,
     category_id,
     address_id,
   }: ICreatePlaceDTO): Promise<Place> {
@@ -23,6 +24,7 @@ export default class PlaceRepository implements IPlaceRepository {
       name,
       image,
       description,
+      city_id,
       category_id,
       address_id,
     });
@@ -38,6 +40,14 @@ export default class PlaceRepository implements IPlaceRepository {
     return findPlaces;
   }
 
+  public async findPlaceByCityId(id: string): Promise<Place[]> {
+    const teste = await this.ormRepository.find({
+      where: { city_id: id },
+    });
+
+    return teste;
+  }
+
   public async findById(id: string): Promise<Place | undefined> {
     const place = await this.ormRepository.findOne({
       where: { id },
@@ -50,6 +60,7 @@ export default class PlaceRepository implements IPlaceRepository {
     name,
     image,
     description,
+    city_id,
     address_id,
     category_id,
   }: IFindEqualPlaceDTO): Promise<Place | undefined> {
@@ -58,6 +69,7 @@ export default class PlaceRepository implements IPlaceRepository {
         name,
         image,
         description,
+        city_id,
         address_id,
         category_id,
       },

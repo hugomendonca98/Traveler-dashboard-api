@@ -10,7 +10,13 @@ import PlaceRepository from '../../typeorm/repositories/PlaceRepository';
 
 export default class PlacesController {
   public async Create(request: Request, response: Response): Promise<Response> {
-    const { name, description, category_id, address_id } = request.body;
+    const {
+      name,
+      description,
+      city_id,
+      category_id,
+      address_id,
+    } = request.body;
     const image = request.file?.filename;
 
     const placeRepository = new PlaceRepository();
@@ -24,6 +30,7 @@ export default class PlacesController {
       name,
       image,
       description,
+      city_id,
       category_id,
       address_id,
     });
@@ -32,7 +39,13 @@ export default class PlacesController {
   }
 
   public async Update(request: Request, response: Response): Promise<Response> {
-    const { name, description, category_id, address_id } = request.body;
+    const {
+      name,
+      description,
+      city_id,
+      category_id,
+      address_id,
+    } = request.body;
     const image = request.file?.filename;
     const { id } = request.params;
 
@@ -48,6 +61,7 @@ export default class PlacesController {
       name,
       image,
       description,
+      city_id,
       category_id,
       address_id,
     });

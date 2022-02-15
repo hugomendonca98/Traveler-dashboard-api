@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Column,
   CreateDateColumn,
@@ -12,6 +13,7 @@ import { Exclude } from 'class-transformer';
 
 import Address from '@modules/addresses/infra/typeorm/entities/Address';
 import Category from '@modules/categories/infra/typeorm/entities/Category';
+import City from '@modules/cities/infra/typeorm/entities/City';
 
 @Entity('place')
 export default class Place {
@@ -26,6 +28,14 @@ export default class Place {
 
   @Column()
   description: string;
+
+  @Exclude()
+  @Column()
+  city_id: string;
+
+  @ManyToOne(() => City)
+  @JoinColumn({ name: 'city_id', referencedColumnName: 'id' })
+  city: City;
 
   @Column()
   @Exclude()

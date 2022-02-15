@@ -14,6 +14,7 @@ export default class CreatePlaceService {
     name,
     image,
     description,
+    city_id,
     category_id,
     address_id,
   }: ICreatePlaceDTO): Promise<Place> {
@@ -25,6 +26,7 @@ export default class CreatePlaceService {
       name,
       image,
       description,
+      city_id,
       category_id,
       address_id,
     });
@@ -39,6 +41,7 @@ export default class CreatePlaceService {
       name,
       image: fileName,
       description,
+      city_id,
       category_id,
       address_id,
     });

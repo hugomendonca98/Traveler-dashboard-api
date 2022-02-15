@@ -21,6 +21,7 @@ placeRouters.post(
     [Segments.BODY]: {
       name: Joi.string().required().min(2),
       description: Joi.string().required().min(2),
+      city_id: Joi.string().uuid().required(),
       category_id: Joi.string().uuid().required(),
       address_id: Joi.string().uuid().required(),
     },
@@ -36,6 +37,7 @@ placeRouters.put(
     [Segments.BODY]: {
       name: Joi.string().required().min(2),
       description: Joi.string().required().min(2),
+      city_id: Joi.string().uuid().required(),
       category_id: Joi.string().uuid().required(),
       address_id: Joi.string().uuid().required(),
     },
