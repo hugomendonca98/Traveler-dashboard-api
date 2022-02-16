@@ -6,6 +6,7 @@ export default interface ICityRepository {
   findById(id: string): Promise<City | undefined>;
   findByName(name: string): Promise<City | undefined>;
   findAll(): Promise<City[]>;
+  searchByName(name: string): Promise<City[]>;
   delete(city: City): Promise<void>;
   save(city: City): Promise<City>;
 }

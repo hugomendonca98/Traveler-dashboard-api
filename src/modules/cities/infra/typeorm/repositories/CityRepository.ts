@@ -1,6 +1,6 @@
 import ICreateCityDTO from '@modules/cities/dtos/ICreateCityDTO';
 import ICityRepository from '@modules/cities/repositories/ICityRepository';
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Like, Repository } from 'typeorm';
 import City from '../entities/City';
 
 export default class CityRepository implements ICityRepository {
@@ -27,7 +27,9 @@ export default class CityRepository implements ICityRepository {
   }
 
   public async findAll(): Promise<City[]> {
-    const cities = await this.ormRepository.find();
+    const cities = await this.ormRepository.find({
+      relations: ['place'],
+    });
 
     return cities;
   }
@@ -46,6 +48,14 @@ export default class CityRepository implements ICityRepository {
     });
 
     return city;
+  }
+
+  public async searchByName(name: string): Promise<City[]> {
+    const cities = await this.ormRepository.find({
+      name: Like(`%${name}%`),
+    });
+
+    return cities;
   }
 
   public async delete(city: City): Promise<void> {

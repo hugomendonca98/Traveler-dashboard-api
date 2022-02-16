@@ -63,12 +63,13 @@ export default class CitiesController {
     return response.json(city);
   }
 
-  public async Index(_request: Request, response: Response): Promise<Response> {
+  public async Index(request: Request, response: Response): Promise<Response> {
+    const { search } = request.query;
     const cityRepositoy = new CityRepository();
 
     const listCityService = new ListCityService(cityRepositoy);
 
-    const cities = await listCityService.execute();
+    const cities = await listCityService.execute(search?.toString());
 
     return response.json(instanceToInstance(cities));
   }

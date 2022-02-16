@@ -42,7 +42,7 @@ export default class Place {
   category_id: string;
 
   // eagler é para trazer as relações, cascade se tiver ralação dentro da relação.
-  @ManyToOne(() => Category, { eager: true, cascade: true })
+  @ManyToOne(() => Category, { eager: true })
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
@@ -50,7 +50,7 @@ export default class Place {
   @Exclude()
   address_id: string;
 
-  @ManyToOne(() => Address, { eager: true, cascade: true })
+  @ManyToOne(() => Address, { eager: true })
   @JoinColumn({ name: 'address_id' })
   address: Address;
 
