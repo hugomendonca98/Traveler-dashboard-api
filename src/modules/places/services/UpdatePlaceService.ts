@@ -1,3 +1,4 @@
+import ICityRepository from '@modules/cities/repositories/ICityRepository';
 import AppError from '@shared/errors/appError';
 import IStorageProvider from '@shared/providers/StorageProvider/models/IStorageProvider';
 import IUpdatePlaceDTO from '../dtos/IUpdatePlaceDTO';
@@ -7,6 +8,7 @@ import IPlaceRepository from '../repositories/IPlaceRepository';
 export default class UpdatePlaceService {
   constructor(
     private placeRepository: IPlaceRepository,
+    private cityRepository: ICityRepository,
     private storageProvider: IStorageProvider,
   ) {}
 

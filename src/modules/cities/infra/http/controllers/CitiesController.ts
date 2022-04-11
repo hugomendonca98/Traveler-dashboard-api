@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
+import { instanceToInstance } from 'class-transformer';
 
 import CreateCityService from '@modules/cities/services/CreateCityService';
 import DeleteCityService from '@modules/cities/services/DeleteCityService';
 import ListCityService from '@modules/cities/services/ListCityService';
 import UpdateCityService from '@modules/cities/services/UpdateCityService';
 import DiskStorageProvider from '@shared/providers/StorageProvider/implementations/DiskStorageProvider';
-import { instanceToInstance } from 'class-transformer';
 import CityRepository from '../../typeorm/repositories/CityRepository';
 
 export default class CitiesController {
@@ -64,12 +64,11 @@ export default class CitiesController {
   }
 
   public async Index(request: Request, response: Response): Promise<Response> {
-    const { search } = request.query;
     const cityRepositoy = new CityRepository();
 
     const listCityService = new ListCityService(cityRepositoy);
 
-    const cities = await listCityService.execute(search?.toString());
+    const cities = await listCityService.execute();
 
     return response.json(instanceToInstance(cities));
   }

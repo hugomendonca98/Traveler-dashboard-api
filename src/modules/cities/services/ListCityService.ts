@@ -4,14 +4,8 @@ import ICityRepository from '../repositories/ICityRepository';
 export default class ListCityService {
   constructor(private cityRepository: ICityRepository) {}
 
-  public async execute(search: string | undefined): Promise<City[]> {
-    if (!search) {
-      const cities = await this.cityRepository.findAll();
-
-      return cities;
-    }
-
-    const cities = await this.cityRepository.searchByName(search);
+  public async execute(): Promise<City[]> {
+    const cities = await this.cityRepository.findAll();
 
     return cities;
   }
