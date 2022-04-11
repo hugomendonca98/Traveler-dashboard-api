@@ -11,7 +11,7 @@ export default class ShowCityController {
 
     const showCityService = new ShowCityService(cityRepositoy);
 
-    const city = showCityService.execute(id);
+    const city = await showCityService.execute(id);
 
     return response.json(instanceToInstance(city));
   }
