@@ -9,7 +9,7 @@ export default class ShowCityService {
     const city = await this.cityRepository.findById(id);
 
     if (!city) {
-      throw new AppError('City not exist.');
+      throw new AppError('City not exist.', 400);
     }
 
     return city;
