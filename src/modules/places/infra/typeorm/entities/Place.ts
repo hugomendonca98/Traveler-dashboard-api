@@ -9,11 +9,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 import Address from '@modules/addresses/infra/typeorm/entities/Address';
 import Category from '@modules/categories/infra/typeorm/entities/Category';
 import City from '@modules/cities/infra/typeorm/entities/City';
+import upload from '@config/upload';
 
 @Entity('place')
 export default class Place {
@@ -23,8 +24,25 @@ export default class Place {
   @Column()
   name: string;
 
+  @Exclude()
   @Column()
   image: string;
+
+  @Expose({ name: 'place_image' })
+  getImageUrl(): string | null {
+    if (!this.image) {
+      return null;
+    }
+
+    switch (upload.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.image}`;
+      case 's3':
+        return `${process.env.APP_API_URL}/files/${this.image}`;
+      default:
+        return null;
+    }
+  }
 
   @Column()
   description: string;
