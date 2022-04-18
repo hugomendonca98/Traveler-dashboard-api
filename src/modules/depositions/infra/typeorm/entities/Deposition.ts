@@ -12,8 +12,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('depositoion')
-class Depositoion {
+@Entity('deposition')
+class Deposition {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -26,6 +26,9 @@ class Depositoion {
 
   @Column()
   description: string;
+
+  @Column()
+  stars: number;
 
   @Exclude()
   @Column()
@@ -65,4 +68,4 @@ class Depositoion {
   updated_at: Date;
 }
 
-export default Depositoion;
+export default Deposition;

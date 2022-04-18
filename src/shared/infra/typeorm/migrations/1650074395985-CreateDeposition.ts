@@ -23,6 +23,10 @@ export default class CreateDeposition1650074395985
             type: 'varchar',
           },
           {
+            name: 'stars',
+            type: 'integer',
+          },
+          {
             name: 'avatar',
             type: 'varchar',
           },
