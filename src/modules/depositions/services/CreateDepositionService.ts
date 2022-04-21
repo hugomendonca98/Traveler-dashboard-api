@@ -17,10 +17,15 @@ export default class CreateDepositionService {
   public async execute({
     name,
     description,
+    stars,
     avatar,
     city_id,
     place_id,
   }: ICreateDepositionDTO): Promise<Deposition> {
+    if (stars > 5 || stars < 1) {
+      throw new AppError('Must set from 1 to 5 stars in your review.');
+    }
+
     if (!avatar) {
       throw new AppError('Avatar image is required.');
     }
@@ -40,6 +45,7 @@ export default class CreateDepositionService {
     const deposition = await this.depositionRepository.create({
       name,
       description,
+      stars,
       avatar,
       city_id,
       place_id,

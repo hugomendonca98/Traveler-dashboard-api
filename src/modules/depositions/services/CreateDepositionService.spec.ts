@@ -50,6 +50,7 @@ describe('CreteDeposition', () => {
       name: 'Hugo Mendonça',
       avatar: 'example.png',
       description: 'example description',
+      stars: 4,
       city_id: city.id,
       place_id: place.id,
     });
@@ -58,6 +59,7 @@ describe('CreteDeposition', () => {
     expect(deposition.name).toEqual('Hugo Mendonça');
     expect(deposition.avatar).toEqual('example.png');
     expect(deposition.description).toEqual('example description');
+    expect(deposition.stars).toEqual(4);
     expect(deposition.city_id).toEqual(city.id);
     expect(deposition.place_id).toEqual(place.id);
     expect(deposition).toEqual(deposition);
@@ -79,6 +81,7 @@ describe('CreteDeposition', () => {
         name: 'Hugo Mendonça',
         avatar: 'example.png',
         description: 'example description',
+        stars: 4,
         city_id: 'non existing id',
         place_id: place.id,
       }),
@@ -98,6 +101,7 @@ describe('CreteDeposition', () => {
         name: 'Hugo Mendonça',
         avatar: 'example.png',
         description: 'example description',
+        stars: 4,
         city_id: city.id,
         place_id: 'non existing id',
       }),
@@ -126,6 +130,36 @@ describe('CreteDeposition', () => {
         name: 'Hugo Mendonça',
         avatar: undefined,
         description: 'example description',
+        stars: 4,
+        city_id: city.id,
+        place_id: place.id,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  // Não deve ser capaz de criar depoimento com menos de 1 estrela ou mais de 5.
+  it('Should not be able to create deposition with less than 1 star or more than 5.', async () => {
+    const city = await fakeCityRepository.create({
+      name: 'São paulo',
+      description: 'example description',
+      image: 'sp.png',
+    });
+
+    const place = await fakePlaceRepository.create({
+      name: 'place name',
+      image: 'place.png',
+      city_id: city.id,
+      address_id: 'address',
+      category_id: 'category',
+      description: 'place description',
+    });
+
+    await expect(
+      createDepositionService.execute({
+        name: 'Hugo Mendonça',
+        avatar: 'avatar.png',
+        description: 'example description',
+        stars: 6,
         city_id: city.id,
         place_id: place.id,
       }),
