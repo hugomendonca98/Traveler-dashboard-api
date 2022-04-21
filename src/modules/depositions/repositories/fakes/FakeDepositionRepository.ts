@@ -1,13 +1,15 @@
 import { v4 as uuid } from 'uuid';
 
-import ICreateDepositionDTO from '@modules/depositions/dtos/ICreateDepositionDTO';
 import Deposition from '@modules/depositions/infra/typeorm/entities/Deposition';
+import ICreateDepositionRepositoryDTO from '@modules/depositions/dtos/ICreateDepositionRepositoryDTO';
 import IDepositionRepository from '../IDepositionRepository';
 
 export default class FakeDepositionRepository implements IDepositionRepository {
   private depositions: Deposition[] = [];
 
-  public async create(data: ICreateDepositionDTO): Promise<Deposition> {
+  public async create(
+    data: ICreateDepositionRepositoryDTO,
+  ): Promise<Deposition> {
     const deposition = new Deposition();
 
     Object.assign(deposition, { id: uuid() }, data);

@@ -51,7 +51,6 @@ describe('CreteDeposition', () => {
       avatar: 'example.png',
       description: 'example description',
       stars: 4,
-      city_id: city.id,
       place_id: place.id,
     });
 
@@ -82,7 +81,6 @@ describe('CreteDeposition', () => {
         avatar: 'example.png',
         description: 'example description',
         stars: 4,
-        city_id: 'non existing id',
         place_id: place.id,
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -90,19 +88,12 @@ describe('CreteDeposition', () => {
 
   // Não deve ser capaz de criar um depoimento caso o local não exista.
   it('Should not be able to create deposition with non existing place', async () => {
-    const city = await fakeCityRepository.create({
-      name: 'São paulo',
-      description: 'example description',
-      image: 'sp.png',
-    });
-
     await expect(
       createDepositionService.execute({
         name: 'Hugo Mendonça',
         avatar: 'example.png',
         description: 'example description',
         stars: 4,
-        city_id: city.id,
         place_id: 'non existing id',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -131,7 +122,6 @@ describe('CreteDeposition', () => {
         avatar: undefined,
         description: 'example description',
         stars: 4,
-        city_id: city.id,
         place_id: place.id,
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -160,7 +150,6 @@ describe('CreteDeposition', () => {
         avatar: 'avatar.png',
         description: 'example description',
         stars: 6,
-        city_id: city.id,
         place_id: place.id,
       }),
     ).rejects.toBeInstanceOf(AppError);

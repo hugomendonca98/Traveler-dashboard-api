@@ -19,7 +19,6 @@ export default class CreateDepositionService {
     description,
     stars,
     avatar,
-    city_id,
     place_id,
   }: ICreateDepositionDTO): Promise<Deposition> {
     if (stars > 5 || stars < 1) {
@@ -30,16 +29,16 @@ export default class CreateDepositionService {
       throw new AppError('Avatar image is required.');
     }
 
-    const city = await this.cityRepository.findById(city_id);
-
-    if (!city) {
-      throw new AppError('City is not found.');
-    }
-
     const place = await this.placeRepository.findById(place_id);
 
     if (!place) {
       throw new AppError('Place is not found.');
+    }
+
+    const city = await this.cityRepository.findById(place.city_id);
+
+    if (!city) {
+      throw new AppError('City is not found.');
     }
 
     const deposition = await this.depositionRepository.create({
@@ -47,7 +46,7 @@ export default class CreateDepositionService {
       description,
       stars,
       avatar,
-      city_id,
+      city_id: city.id,
       place_id,
     });
 
