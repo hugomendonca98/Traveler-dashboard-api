@@ -24,6 +24,8 @@ describe('CreteDeposition', () => {
     createDepositionService = new CreateDepositionService(
       fakeDepositionRepository,
       fakeStorageProvider,
+      fakeCityRepository,
+      fakePlaceRepository,
     );
   });
 
@@ -57,7 +59,7 @@ describe('CreteDeposition', () => {
     expect(deposition.avatar).toEqual('example.png');
     expect(deposition.description).toEqual('example description');
     expect(deposition.city_id).toEqual(city.id);
-    expect(deposition.place.id).toEqual(place.id);
+    expect(deposition.place_id).toEqual(place.id);
     expect(deposition).toEqual(deposition);
   });
 
@@ -72,8 +74,8 @@ describe('CreteDeposition', () => {
       description: 'place description',
     });
 
-    expect(
-      await createDepositionService.execute({
+    await expect(
+      createDepositionService.execute({
         name: 'Hugo Mendonça',
         avatar: 'example.png',
         description: 'example description',
@@ -91,8 +93,8 @@ describe('CreteDeposition', () => {
       image: 'sp.png',
     });
 
-    expect(
-      await createDepositionService.execute({
+    await expect(
+      createDepositionService.execute({
         name: 'Hugo Mendonça',
         avatar: 'example.png',
         description: 'example description',
@@ -119,8 +121,8 @@ describe('CreteDeposition', () => {
       description: 'place description',
     });
 
-    expect(
-      await createDepositionService.execute({
+    await expect(
+      createDepositionService.execute({
         name: 'Hugo Mendonça',
         avatar: undefined,
         description: 'example description',
