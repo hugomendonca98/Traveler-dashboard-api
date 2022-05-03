@@ -31,6 +31,10 @@ export default class CreateDeposition1650074395985
             type: 'varchar',
           },
           {
+            name: 'moderation_status',
+            type: 'varchar',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

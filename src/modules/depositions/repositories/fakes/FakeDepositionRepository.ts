@@ -30,4 +30,14 @@ export default class FakeDepositionRepository implements IDepositionRepository {
 
     return deposition;
   }
+
+  public async save(deposition: Deposition): Promise<Deposition> {
+    const findIndex = this.depositions.findIndex(
+      findDeposition => findDeposition.id === deposition.id,
+    );
+
+    this.depositions[findIndex] = deposition;
+
+    return deposition;
+  }
 }

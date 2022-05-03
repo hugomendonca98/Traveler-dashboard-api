@@ -5,4 +5,5 @@ export default interface IDepositionRepository {
   create(data: ICreateDepositionRepositoryDTO): Promise<Deposition>;
   findById(id: string): Promise<Deposition | undefined>;
   findByName(name: string): Promise<Deposition | undefined>;
+  save(deposition: Deposition): Promise<Deposition>;
 }

@@ -3,5 +3,6 @@ export default interface ICreateDepositionDTO {
   avatar: string | undefined;
   description: string;
   stars: number;
+  moderation_status: 'approved' | 'disapproved' | 'waiting';
   place_id: string;
 }

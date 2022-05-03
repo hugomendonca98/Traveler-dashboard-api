@@ -8,6 +8,5 @@ export default interface IPlaceRepository {
   findEqualPlace(data: IFindEqualPlaceDTO): Promise<Place | undefined>;
   findAll(): Promise<Place[]>;
   delete(place: Place): Promise<void>;
-
   save(place: Place): Promise<Place>;
 }

@@ -24,3 +24,5 @@ depositionRouter.post(
   }),
   depositionController.create,
 );
+
+export default depositionRouter;

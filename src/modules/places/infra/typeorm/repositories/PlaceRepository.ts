@@ -19,11 +19,15 @@ export default class PlaceRepository implements IPlaceRepository {
     city_id,
     category_id,
     address_id,
+    number_depositions,
+    total_depositions_stars,
   }: ICreatePlaceDTO): Promise<Place> {
     const place = this.ormRepository.create({
       name,
       image,
       description,
+      number_depositions,
+      total_depositions_stars,
       city_id,
       category_id,
       address_id,
@@ -35,9 +39,9 @@ export default class PlaceRepository implements IPlaceRepository {
   }
 
   public async findAll(): Promise<Place[]> {
-    const findPlaces = await this.ormRepository.find();
+    const places = await this.ormRepository.find();
 
-    return findPlaces;
+    return places;
   }
 
   public async findPlaceByCityId(id: string): Promise<Place[]> {

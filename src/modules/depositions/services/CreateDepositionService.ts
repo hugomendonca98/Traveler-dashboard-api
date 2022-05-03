@@ -21,7 +21,7 @@ export default class CreateDepositionService {
     avatar,
     place_id,
   }: ICreateDepositionDTO): Promise<Deposition> {
-    if (stars > 5 || stars < 1) {
+    if (stars < 1 || stars > 5) {
       throw new AppError('Must set from 1 to 5 stars in your review.');
     }
 
@@ -46,6 +46,7 @@ export default class CreateDepositionService {
       description,
       stars,
       avatar,
+      moderation_status: 'waiting',
       city_id: city.id,
       place_id,
     });

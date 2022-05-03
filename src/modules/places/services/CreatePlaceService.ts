@@ -41,6 +41,8 @@ export default class CreatePlaceService {
       name,
       image: fileName,
       description,
+      number_depositions: 0,
+      total_depositions_stars: 0,
       city_id,
       category_id,
       address_id,

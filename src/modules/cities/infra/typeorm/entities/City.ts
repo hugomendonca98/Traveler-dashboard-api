@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import upload from '@config/upload';
+import Deposition from '@modules/depositions/infra/typeorm/entities/Deposition';
 import Place from '@modules/places/infra/typeorm/entities/Place';
 
 import { Exclude, Expose } from 'class-transformer';
@@ -29,6 +30,9 @@ export default class City {
 
   @OneToMany(() => Place, place => place.city, { eager: true })
   place: Place[];
+
+  @OneToMany(() => Deposition, deposition => deposition.city, { eager: true })
+  depositions: Deposition[];
 
   @CreateDateColumn()
   created_at: Date;

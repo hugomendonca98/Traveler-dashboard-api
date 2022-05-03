@@ -5,6 +5,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -15,6 +16,7 @@ import Address from '@modules/addresses/infra/typeorm/entities/Address';
 import Category from '@modules/categories/infra/typeorm/entities/Category';
 import City from '@modules/cities/infra/typeorm/entities/City';
 import upload from '@config/upload';
+import Deposition from '@modules/depositions/infra/typeorm/entities/Deposition';
 
 @Entity('place')
 export default class Place {
@@ -47,6 +49,12 @@ export default class Place {
   @Column()
   description: string;
 
+  @Column()
+  total_depositions_stars: number;
+
+  @Column()
+  number_depositions: number;
+
   @Exclude()
   @Column()
   city_id: string;
@@ -71,6 +79,9 @@ export default class Place {
   @ManyToOne(() => Address, { eager: true })
   @JoinColumn({ name: 'address_id' })
   address: Address;
+
+  @OneToMany(() => Deposition, deposition => deposition.place, { eager: true })
+  depositions: Deposition[];
 
   @CreateDateColumn()
   created_at: Date;

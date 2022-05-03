@@ -26,6 +26,14 @@ export default class CreatePlace1643522417502 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'total_depositions_stars',
+            type: 'integer',
+          },
+          {
+            name: 'number_depositions',
+            type: 'integer',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

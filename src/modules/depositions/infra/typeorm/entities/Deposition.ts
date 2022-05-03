@@ -30,6 +30,9 @@ class Deposition {
   @Column()
   stars: number;
 
+  @Column()
+  moderation_status: string;
+
   @Exclude()
   @Column()
   city_id: string;

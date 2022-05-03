@@ -46,12 +46,6 @@ export default class CitiesController {
       storageProvider,
     );
 
-    const city = await createCityService.execute({
-      name,
-      image,
-      description,
-    });
-
     const createAddressService = new CreateAddressService(addressRepository);
 
     const address = await createAddressService.execute({
@@ -61,10 +55,18 @@ export default class CitiesController {
       number,
     });
 
+    const city = await createCityService.execute({
+      name,
+      image,
+      description,
+    });
+
     await createPlaceService.execute({
       name: localName,
       image: localImage,
       description: localDescription,
+      number_depositions: 0,
+      total_depositions_stars: 0,
       city_id: city.id,
       category_id: categoryId,
       address_id: address.id,
