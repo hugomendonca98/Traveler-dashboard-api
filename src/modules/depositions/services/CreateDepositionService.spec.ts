@@ -40,6 +40,8 @@ describe('CreteDeposition', () => {
     const place = await fakePlaceRepository.create({
       name: 'place name',
       image: 'place.png',
+      number_depositions: 0,
+      total_depositions_stars: 0,
       city_id: city.id,
       address_id: 'address',
       category_id: 'category',
@@ -51,6 +53,7 @@ describe('CreteDeposition', () => {
       avatar: 'example.png',
       description: 'example description',
       stars: 4,
+      moderation_status: 'waiting',
       place_id: place.id,
     });
 
@@ -69,6 +72,8 @@ describe('CreteDeposition', () => {
     const place = await fakePlaceRepository.create({
       name: 'place name',
       image: 'place.png',
+      number_depositions: 0,
+      total_depositions_stars: 0,
       city_id: 'city id',
       address_id: 'address',
       category_id: 'category',
@@ -81,6 +86,7 @@ describe('CreteDeposition', () => {
         avatar: 'example.png',
         description: 'example description',
         stars: 4,
+        moderation_status: 'waiting',
         place_id: place.id,
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -94,6 +100,7 @@ describe('CreteDeposition', () => {
         avatar: 'example.png',
         description: 'example description',
         stars: 4,
+        moderation_status: 'waiting',
         place_id: 'non existing id',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -110,6 +117,8 @@ describe('CreteDeposition', () => {
     const place = await fakePlaceRepository.create({
       name: 'place name',
       image: 'place.png',
+      number_depositions: 0,
+      total_depositions_stars: 0,
       city_id: city.id,
       address_id: 'address',
       category_id: 'category',
@@ -122,6 +131,7 @@ describe('CreteDeposition', () => {
         avatar: undefined,
         description: 'example description',
         stars: 4,
+        moderation_status: 'waiting',
         place_id: place.id,
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -138,6 +148,8 @@ describe('CreteDeposition', () => {
     const place = await fakePlaceRepository.create({
       name: 'place name',
       image: 'place.png',
+      number_depositions: 0,
+      total_depositions_stars: 0,
       city_id: city.id,
       address_id: 'address',
       category_id: 'category',
@@ -150,6 +162,7 @@ describe('CreteDeposition', () => {
         avatar: 'avatar.png',
         description: 'example description',
         stars: 6,
+        moderation_status: 'waiting',
         place_id: place.id,
       }),
     ).rejects.toBeInstanceOf(AppError);

@@ -1,12 +1,15 @@
 import FakeCityRepository from '@modules/cities/repositories/fakes/FakeCityRepository';
+import ICityRepository from '@modules/cities/repositories/ICityRepository';
 import AppError from '@shared/errors/appError';
 import FakeStorageProvider from '@shared/providers/StorageProvider/fakes/FakeStorageProvider';
+import IStorageProvider from '@shared/providers/StorageProvider/models/IStorageProvider';
 import FakePlaceRepository from '../repositories/fakes/FakePlaceRepository';
+import IPlaceRepository from '../repositories/IPlaceRepository';
 import UpdatePlaceService from './UpdatePlaceService';
 
-let fakePlaceRepository: FakePlaceRepository;
-let fakeCityRepository: FakeCityRepository;
-let fakeStorageProvider: FakeStorageProvider;
+let fakePlaceRepository: IPlaceRepository;
+let fakeCityRepository: ICityRepository;
+let fakeStorageProvider: IStorageProvider;
 let updatePlaceService: UpdatePlaceService;
 
 describe('UpdatePlace', () => {
@@ -16,6 +19,7 @@ describe('UpdatePlace', () => {
     fakeStorageProvider = new FakeStorageProvider();
     updatePlaceService = new UpdatePlaceService(
       fakePlaceRepository,
+      fakeCityRepository,
       fakeStorageProvider,
     );
   });
@@ -32,6 +36,8 @@ describe('UpdatePlace', () => {
       name: 'São Paulo',
       image: 'SãoPaulo.jpg',
       description: 'São Paulo description',
+      number_depositions: 0,
+      total_depositions_stars: 0,
       category_id: '1234',
       address_id: '12345',
       city_id: city.id,
@@ -104,6 +110,8 @@ describe('UpdatePlace', () => {
       name: 'São Paulo',
       image: 'SãoPaulo.jpg',
       description: 'São Paulo description',
+      number_depositions: 0,
+      total_depositions_stars: 0,
       category_id: '1234',
       address_id: '12345',
       city_id: city.id,
@@ -134,6 +142,8 @@ describe('UpdatePlace', () => {
       name: 'São Paulo',
       image: 'SãoPaulo.jpg',
       description: 'São Paulo description',
+      number_depositions: 0,
+      total_depositions_stars: 0,
       category_id: '1234',
       address_id: '12345',
       city_id: city.id,
