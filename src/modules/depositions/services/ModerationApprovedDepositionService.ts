@@ -1,7 +1,7 @@
-import Place from '@modules/places/infra/typeorm/entities/Place';
 import IPlaceRepository from '@modules/places/repositories/IPlaceRepository';
 import AppError from '@shared/errors/appError';
 import IModerationDepositionDTO from '../dtos/ModerationApprovedDepositionDTO';
+import Deposition from '../infra/typeorm/entities/Deposition';
 import IDepositionRepository from '../repositories/IDepositionRepository';
 
 export default class ModerationApprovedDepositionService {
@@ -11,19 +11,18 @@ export default class ModerationApprovedDepositionService {
   ) {}
 
   public async execute({
-    placeId,
     depositionId,
-  }: IModerationDepositionDTO): Promise<Place> {
-    const place = await this.placeRepository.findById(placeId);
-
-    if (!place) {
-      throw new AppError('Place to be commented does not exist');
-    }
-
+  }: IModerationDepositionDTO): Promise<Deposition> {
     const deposition = await this.depositionRepository.findById(depositionId);
 
     if (!deposition) {
       throw new AppError('Deposition not found.');
+    }
+
+    const place = await this.placeRepository.findById(deposition.place_id);
+
+    if (!place) {
+      throw new AppError('Place to be commented does not exist');
     }
 
     const depositionApproved = Object.assign(deposition, {
@@ -39,6 +38,6 @@ export default class ModerationApprovedDepositionService {
 
     await this.placeRepository.save(placeUpdated);
 
-    return placeUpdated;
+    return depositionApproved;
   }
 }

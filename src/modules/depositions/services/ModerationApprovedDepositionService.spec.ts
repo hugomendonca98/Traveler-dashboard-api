@@ -73,19 +73,18 @@ describe('ModerationApprovedDepositionService', () => {
     });
 
     const moderation_approved = await moderationDeposition.execute({
-      placeId: place.id,
       depositionId: deposition.id,
     });
 
-    const findDeposition = await fakeDepositionRepository.findById(
-      deposition.id,
+    const findPlace = await fakePlaceRepository.findById(
+      moderation_approved.place_id,
     );
 
-    expect(findDeposition?.moderation_status).toEqual('approved');
-    expect(findDeposition).toHaveProperty('id');
-    expect(findDeposition?.stars).toEqual(4);
-    expect(moderation_approved.number_depositions).toEqual(1);
-    expect(moderation_approved.total_depositions_stars).toEqual(6);
+    expect(moderation_approved.moderation_status).toEqual('approved');
+    expect(moderation_approved).toHaveProperty('id');
+    expect(moderation_approved.stars).toEqual(4);
+    expect(findPlace?.number_depositions).toEqual(1);
+    expect(findPlace?.total_depositions_stars).toEqual(6);
   });
 
   // Não deve ser capaz de aprovar um depoimento com um local inexistente.
@@ -96,29 +95,6 @@ describe('ModerationApprovedDepositionService', () => {
       image: 'city.png',
     });
 
-    const address = await fakeAddressRepository.create({
-      street: 'Street name',
-      number: 316,
-      neighborhood: 'Jhon Doe',
-      zip_code: '1234455',
-    });
-
-    const category = await fakeCategoryRepository.create({
-      name: 'Category name',
-      icon: 'icon.png',
-    });
-
-    const place = await fakePlaceRepository.create({
-      name: 'Place name',
-      description: 'Place description',
-      image: 'place.png',
-      number_depositions: 0,
-      total_depositions_stars: 2,
-      city_id: city.id,
-      address_id: address.id,
-      category_id: category.id,
-    });
-
     const deposition = await fakeDepositionRepository.create({
       name: 'Deposition name',
       description: 'Deposition description',
@@ -126,12 +102,11 @@ describe('ModerationApprovedDepositionService', () => {
       moderation_status: 'waiting',
       stars: 4,
       city_id: city.id,
-      place_id: place.id,
+      place_id: 'inexist place',
     });
 
     await expect(
       moderationDeposition.execute({
-        placeId: 'inexist place',
         depositionId: deposition.id,
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -139,38 +114,8 @@ describe('ModerationApprovedDepositionService', () => {
 
   // Não deve ser capaz de aprovar um depoimento com id inexistente.
   it('Should not be able to approve a deposition in a non-existent deposition', async () => {
-    const city = await fakeCityRepository.create({
-      name: 'City name',
-      description: 'City Description',
-      image: 'city.png',
-    });
-
-    const address = await fakeAddressRepository.create({
-      street: 'Street name',
-      number: 316,
-      neighborhood: 'Jhon Doe',
-      zip_code: '1234455',
-    });
-
-    const category = await fakeCategoryRepository.create({
-      name: 'Category name',
-      icon: 'icon.png',
-    });
-
-    const place = await fakePlaceRepository.create({
-      name: 'Place name',
-      description: 'Place description',
-      image: 'place.png',
-      number_depositions: 0,
-      total_depositions_stars: 2,
-      city_id: city.id,
-      address_id: address.id,
-      category_id: category.id,
-    });
-
     await expect(
       moderationDeposition.execute({
-        placeId: place.id,
         depositionId: 'inexist deposition',
       }),
     ).rejects.toBeInstanceOf(AppError);

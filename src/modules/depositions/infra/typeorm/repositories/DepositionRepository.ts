@@ -17,12 +17,14 @@ export default class DepositionRepository implements IDepositionRepository {
     stars,
     city_id,
     place_id,
+    moderation_status,
   }: ICreateDepositionRepositoryDTO): Promise<Deposition> {
     const deposition = this.ormRepository.create({
       name,
       description,
       avatar,
       stars,
+      moderation_status,
       city_id,
       place_id,
     });
@@ -30,6 +32,12 @@ export default class DepositionRepository implements IDepositionRepository {
     await this.ormRepository.save(deposition);
 
     return deposition;
+  }
+
+  public async save(deposition: Deposition): Promise<Deposition> {
+    const depositionSaved = await this.ormRepository.save(deposition);
+
+    return depositionSaved;
   }
 
   public async findById(id: string): Promise<Deposition | undefined> {

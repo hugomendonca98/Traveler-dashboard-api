@@ -7,6 +7,7 @@ import citiesRouter from '@modules/cities/infra/http/routes/cities.routes';
 import addressesRouter from '@modules/addresses/infra/http/routes/addresses.routes';
 import placeRouters from '@modules/places/infra/http/routes/places.routes';
 import depositionRouter from '@modules/depositions/infra/http/routes/deposition.routes';
+import depositionModerationRouter from '@modules/depositions/infra/http/routes/moderation.routes';
 
 const routes = Router();
 
@@ -17,5 +18,6 @@ routes.use('/city', citiesRouter);
 routes.use('/address', addressesRouter);
 routes.use('/place', placeRouters);
 routes.use('/deposition', depositionRouter);
+routes.use('/moderation', depositionModerationRouter);
 
 export default routes;

@@ -30,6 +30,7 @@ export default class DepositionContoller {
       description,
       avatar,
       stars,
+      moderation_status: 'waiting',
       place_id: id,
     });
 

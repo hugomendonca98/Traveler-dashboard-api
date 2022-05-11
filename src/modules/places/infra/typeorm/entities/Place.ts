@@ -80,7 +80,7 @@ export default class Place {
   @JoinColumn({ name: 'address_id' })
   address: Address;
 
-  @OneToMany(() => Deposition, deposition => deposition.place, { eager: true })
+  @OneToMany(() => Deposition, deposition => deposition.place)
   depositions: Deposition[];
 
   @CreateDateColumn()

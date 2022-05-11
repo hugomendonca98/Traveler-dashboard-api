@@ -19,6 +19,7 @@ export default class CreateDepositionService {
     description,
     stars,
     avatar,
+    moderation_status,
     place_id,
   }: ICreateDepositionDTO): Promise<Deposition> {
     if (stars < 1 || stars > 5) {
@@ -41,12 +42,14 @@ export default class CreateDepositionService {
       throw new AppError('City is not found.');
     }
 
+    const filename = await this.storageProvider.saveFile(avatar);
+
     const deposition = await this.depositionRepository.create({
       name,
       description,
       stars,
-      avatar,
-      moderation_status: 'waiting',
+      avatar: filename,
+      moderation_status,
       city_id: city.id,
       place_id,
     });
