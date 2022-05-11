@@ -27,6 +27,12 @@ export default class FakePlaceRepository implements IPlaceRepository {
     return place;
   }
 
+  public async showPlace(id: string): Promise<Place | undefined> {
+    const place = this.places.find(findPlace => findPlace.id === id);
+
+    return place;
+  }
+
   public async findEqualPlace({
     name,
     image,

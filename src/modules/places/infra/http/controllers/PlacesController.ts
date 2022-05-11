@@ -6,6 +6,7 @@ import DeletePlaceService from '@modules/places/services/DeletePlaceService';
 import ListPlaceService from '@modules/places/services/ListPlaceService';
 import UpdatePlaceService from '@modules/places/services/UpdatePlaceService';
 import DiskStorageProvider from '@shared/providers/StorageProvider/implementations/DiskStorageProvider';
+import CityRepository from '@modules/cities/infra/typeorm/repositories/CityRepository';
 import PlaceRepository from '../../typeorm/repositories/PlaceRepository';
 
 export default class PlacesController {
@@ -50,9 +51,11 @@ export default class PlacesController {
     const { id } = request.params;
 
     const placeRepository = new PlaceRepository();
+    const cityRepository = new CityRepository();
     const storageProvider = new DiskStorageProvider();
     const updatePlaceService = new UpdatePlaceService(
       placeRepository,
+      cityRepository,
       storageProvider,
     );
 

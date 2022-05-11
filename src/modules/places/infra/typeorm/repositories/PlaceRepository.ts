@@ -44,6 +44,21 @@ export default class PlaceRepository implements IPlaceRepository {
     return places;
   }
 
+  public async showPlace(id: string): Promise<Place | undefined> {
+    const place = await this.ormRepository
+      .createQueryBuilder('Place')
+      .where('Place.id = :id', { id })
+      .leftJoinAndSelect(
+        'Place.depositions',
+        'deposition',
+        'deposition.moderation_status = :moderation_status',
+        { moderation_status: 'approved' },
+      )
+      .getOne();
+
+    return place;
+  }
+
   public async findPlaceByCityId(id: string): Promise<Place[]> {
     const teste = await this.ormRepository.find({
       where: { city_id: id },

@@ -3,13 +3,17 @@ import ensureAuth from '@modules/users/infra/http/middlewares/ensureAuth';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import multer from 'multer';
+import PlaceController from '../controllers/PlaceController';
 import PlacesController from '../controllers/PlacesController';
 
 const placeRouters = Router();
 const upload = multer(uploadConfig.multer);
 const placesController = new PlacesController();
+const placeController = new PlaceController();
 
-placeRouters.get('/', ensureAuth, placesController.Index);
+placeRouters.get('/', placesController.Index);
+
+placeRouters.get('/:id', placeController.Index);
 
 placeRouters.delete('/:id', ensureAuth, placesController.Delete);
 
