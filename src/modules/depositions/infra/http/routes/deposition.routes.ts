@@ -19,7 +19,7 @@ depositionRouter.post(
     [Segments.BODY]: {
       name: Joi.string().min(2).required(),
       description: Joi.string().min(2).required(),
-      stars: Joi.number().min(1).max(5).required(),
+      stars: Joi.string().required(),
     },
   }),
   depositionController.create,

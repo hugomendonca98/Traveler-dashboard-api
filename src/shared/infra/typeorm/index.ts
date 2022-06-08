@@ -1,4 +1,4 @@
-import { createConnection } from "typeorm";
+import { createConnection } from 'typeorm';
 import 'reflect-metadata';
 
 createConnection();
