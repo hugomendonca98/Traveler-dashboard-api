@@ -7,6 +7,8 @@ import ListPlaceService from '@modules/places/services/ListPlaceService';
 import UpdatePlaceService from '@modules/places/services/UpdatePlaceService';
 import DiskStorageProvider from '@shared/providers/StorageProvider/implementations/DiskStorageProvider';
 import CityRepository from '@modules/cities/infra/typeorm/repositories/CityRepository';
+import AddressRepository from '@modules/addresses/infra/typeorm/repositories/AddressRepository';
+import CategoryRepository from '@modules/categories/infra/typeorm/repositories/CategoryRepository';
 import PlaceRepository from '../../typeorm/repositories/PlaceRepository';
 
 export default class PlacesController {
@@ -22,9 +24,15 @@ export default class PlacesController {
 
     const placeRepository = new PlaceRepository();
     const storageProvider = new DiskStorageProvider();
+    const cityRepository = new CityRepository();
+    const addressRepository = new AddressRepository();
+    const categoryRepository = new CategoryRepository();
     const createPlaceService = new CreatePlaceService(
       placeRepository,
       storageProvider,
+      addressRepository,
+      cityRepository,
+      categoryRepository,
     );
 
     const place = await createPlaceService.execute({
@@ -34,6 +42,8 @@ export default class PlacesController {
       city_id,
       category_id,
       address_id,
+      number_depositions: 0,
+      total_depositions_stars: 0,
     });
 
     return response.json(instanceToInstance(place));

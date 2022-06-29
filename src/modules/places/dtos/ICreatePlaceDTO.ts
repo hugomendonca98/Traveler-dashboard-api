@@ -5,4 +5,6 @@ export default interface ICreatePlaceDTO {
   city_id: string;
   category_id: string;
   address_id: string;
+  number_depositions: number;
+  total_depositions_stars: number;
 }
