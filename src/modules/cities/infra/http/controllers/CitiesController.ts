@@ -10,6 +10,7 @@ import PlaceRepository from '@modules/places/infra/typeorm/repositories/PlaceRep
 import CreatePlaceService from '@modules/places/services/CreatePlaceService';
 import AddressRepository from '@modules/addresses/infra/typeorm/repositories/AddressRepository';
 import CreateAddressService from '@modules/addresses/services/CreateAddressService';
+import CategoryRepository from '@modules/categories/infra/typeorm/repositories/CategoryRepository';
 import CityRepository from '../../typeorm/repositories/CityRepository';
 
 export default class CitiesController {
@@ -32,17 +33,21 @@ export default class CitiesController {
     const image = files.image[0].filename;
     const localImage = files.localImage[0].filename;
 
-    const cityRepositoy = new CityRepository();
+    const cityRepository = new CityRepository();
+    const categoryRepository = new CategoryRepository();
     const storageProvider = new DiskStorageProvider();
     const addressRepository = new AddressRepository();
     const placeRepository = new PlaceRepository();
     const createPlaceService = new CreatePlaceService(
       placeRepository,
       storageProvider,
+      addressRepository,
+      cityRepository,
+      categoryRepository,
     );
 
     const createCityService = new CreateCityService(
-      cityRepositoy,
+      cityRepository,
       storageProvider,
     );
 

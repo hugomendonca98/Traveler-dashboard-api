@@ -1,10 +1,10 @@
 module.exports = [
   {
     type: "postgres",
-    ssl: true,
+    /*ssl: true,
     extra: {
       ssl: { rejectUnauthorized: false }
-    },
+    },*/
     url: process.env.DATABASE_URL,
     entities: [
       `./${process.env.ROOT_DIR}/modules/**/infra/typeorm/entities/*.${process.env.FILE_TYPE}`,
