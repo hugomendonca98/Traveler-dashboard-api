@@ -58,7 +58,7 @@ export default {
   config: {
     disk: {},
     aws: {
-      bucket: 'bucket da aws aqui',
+      bucket: 'traveler-node',
     },
   },
 } as IUploadConfig;

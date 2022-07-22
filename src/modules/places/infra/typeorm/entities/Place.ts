@@ -40,7 +40,7 @@ export default class Place {
       case 'disk':
         return `${process.env.APP_API_URL}/files/${this.image}`;
       case 's3':
-        return `${process.env.APP_API_URL}/files/${this.image}`;
+        return `https://${upload.config.aws.bucket}.s3-sa-east-1.amazonaws.com/${this.image}`;
       default:
         return null;
     }

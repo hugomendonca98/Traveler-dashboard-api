@@ -58,7 +58,7 @@ class Deposition {
       case 'disk':
         return `${process.env.APP_API_URL}/files/${this.avatar}`;
       case 's3':
-        return `${process.env.APP_API_URL}/files/${this.avatar}`;
+        return `https://${upload.config.aws.bucket}.s3-sa-east-1.amazonaws.com/${this.avatar}`;
       default:
         return null;
     }

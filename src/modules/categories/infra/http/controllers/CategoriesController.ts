@@ -5,6 +5,7 @@ import DeleteCategoryService from '@modules/categories/services/DeleteCategorySe
 import ListCategoryService from '@modules/categories/services/ListCategoryService';
 import UpdateCategoryService from '@modules/categories/services/UpdateCategoryService';
 import DiskStorageProvider from '@shared/providers/StorageProvider/implementations/DiskStorageProvider';
+import S3StorageProvider from '@shared/providers/StorageProvider/implementations/S3StorageProvider';
 import CategoryRepository from '../../typeorm/repositories/CategoryRepository';
 
 export default class CategoriesController {
@@ -22,7 +23,11 @@ export default class CategoriesController {
     const icon = request.file?.filename;
 
     const categoryRepository = new CategoryRepository();
-    const storageProvider = new DiskStorageProvider();
+    const storageProvider =
+      process.env.STORAGE_DRIVER === 's3'
+        ? new S3StorageProvider()
+        : new DiskStorageProvider();
+
     const createCategoryService = new CreateCategoryService(
       categoryRepository,
       storageProvider,

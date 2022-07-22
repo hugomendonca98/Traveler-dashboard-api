@@ -30,7 +30,7 @@ export default class Category {
       case 'disk':
         return `${process.env.APP_API_URL}/files/${this.icon}`;
       case 's3':
-        return `${process.env.APP_API_URL}/files/${this.icon}`;
+        return `https://${upload.config.aws.bucket}.s3-sa-east-1.amazonaws.com/${this.icon}`;
       default:
         return null;
     }

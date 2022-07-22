@@ -5,6 +5,7 @@ import CityRepository from '@modules/cities/infra/typeorm/repositories/CityRepos
 import CreateDepositionService from '@modules/depositions/services/CreateDepositionService';
 import PlaceRepository from '@modules/places/infra/typeorm/repositories/PlaceRepository';
 import DiskStorageProvider from '@shared/providers/StorageProvider/implementations/DiskStorageProvider';
+import S3StorageProvider from '@shared/providers/StorageProvider/implementations/S3StorageProvider';
 import DepositionRepository from '../../typeorm/repositories/DepositionRepository';
 
 export default class DepositionContoller {
@@ -15,12 +16,15 @@ export default class DepositionContoller {
 
     const cityRepository = new CityRepository();
     const placeRepository = new PlaceRepository();
-    const storagedProvider = new DiskStorageProvider();
+    const storageProvider =
+      process.env.STORAGE_DRIVER === 's3'
+        ? new S3StorageProvider()
+        : new DiskStorageProvider();
     const depositionRepository = new DepositionRepository();
 
     const createDepositionService = new CreateDepositionService(
       depositionRepository,
-      storagedProvider,
+      storageProvider,
       cityRepository,
       placeRepository,
     );

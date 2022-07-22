@@ -11,6 +11,7 @@ import CreatePlaceService from '@modules/places/services/CreatePlaceService';
 import AddressRepository from '@modules/addresses/infra/typeorm/repositories/AddressRepository';
 import CreateAddressService from '@modules/addresses/services/CreateAddressService';
 import CategoryRepository from '@modules/categories/infra/typeorm/repositories/CategoryRepository';
+import S3StorageProvider from '@shared/providers/StorageProvider/implementations/S3StorageProvider';
 import CityRepository from '../../typeorm/repositories/CityRepository';
 
 export default class CitiesController {
@@ -35,7 +36,10 @@ export default class CitiesController {
 
     const cityRepository = new CityRepository();
     const categoryRepository = new CategoryRepository();
-    const storageProvider = new DiskStorageProvider();
+    const storageProvider =
+      process.env.STORAGE_DRIVER === 's3'
+        ? new S3StorageProvider()
+        : new DiskStorageProvider();
     const addressRepository = new AddressRepository();
     const placeRepository = new PlaceRepository();
     const createPlaceService = new CreatePlaceService(
