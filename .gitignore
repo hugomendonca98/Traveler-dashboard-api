@@ -4,6 +4,9 @@
 rascunhos.md
 /dist
 /coverage
-/temp/*.*
-/temp/uploads/*.*
+temp/uploads/*
+temp/*
+!temp/uploads
+!temp/uploads/.gitkeep
+!temp/.gitkeep
 /.vscode
