@@ -2,11 +2,7 @@ module.exports = [
   {
     name: "default",
     type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "h27041998",
-    database: "postgres",
+    url: process.env.DATABASE_URL,
     entities: [
       `./${process.env.ROOT_DIR}/modules/**/infra/typeorm/entities/*.{ts, js}`,
     ],
@@ -14,7 +10,7 @@ module.exports = [
       `./${process.env.ROOT_DIR}/shared/infra/typeorm/migrations/*.{ts, js}`,
     ],
     cli: {
-      migrationsDir: `./${process.env.ROOT_DIR}/shared/infra/typeorm/migrations`,
+      migrationsDir: `./src/shared/infra/typeorm/migrations`,
     },
   },
 ];
