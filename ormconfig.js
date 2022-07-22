@@ -1,6 +1,5 @@
 module.exports = [
   {
-    name: "default",
     type: "postgres",
     ssl: true,
     extra: {
