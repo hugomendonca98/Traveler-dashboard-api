@@ -48,6 +48,8 @@ export default class PlaceRepository implements IPlaceRepository {
     const place = await this.ormRepository
       .createQueryBuilder('Place')
       .where('Place.id = :id', { id })
+      .innerJoinAndSelect('Place.address', 'address')
+      .innerJoinAndSelect('Place.category', 'category')
       .leftJoinAndSelect(
         'Place.depositions',
         'deposition',
