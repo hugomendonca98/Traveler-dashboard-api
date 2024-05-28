@@ -7,3 +7,5 @@ rascunhos.md
 /temp/*.*
 /temp/uploads/*.*
 /.vscode
+bun.lockb
+yarn.lock
