@@ -5,10 +5,7 @@
     "jest": true
   },
   "extends": [
-    "airbnb-base",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "@rocketseat/eslint-config/node"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -19,10 +16,6 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
   "rules": {
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
